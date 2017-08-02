@@ -1,0 +1,8 @@
+framework: jasmine2
+serve_files:
+    - test_bundle.js
+src_files:
+    - spec/test.js
+launch_in_dev:
+    - Chrome
+    - Safari
