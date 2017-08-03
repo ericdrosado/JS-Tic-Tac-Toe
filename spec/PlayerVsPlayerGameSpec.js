@@ -2,6 +2,8 @@ var MockUI = require('./mocks/MockUI');
 var PlayerVsPlayerGame = require('../src/games/PlayerVsPlayerGame');
 
 describe("PlayerVsPlayerGame", function() {
+  var mockUI;
+  var game;
 
   beforeEach(function() {
     mockUI = new MockUI();
