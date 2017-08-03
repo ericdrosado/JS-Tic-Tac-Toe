@@ -3,6 +3,12 @@ body {
   padding-bottom: 2em;
 }
 
+td {
+border: 1px solid black;
+height: 50px;
+width: 50px;
+}
+
 .spot {
   font-size: 4em;
   height: 100px;
