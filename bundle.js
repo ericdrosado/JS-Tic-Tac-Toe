@@ -18255,9 +18255,6 @@ PlayerVsPlayerGame.prototype.play = function() {
   this.ui.displayTurn("X");
 }
 
-
-
-
 module.exports = PlayerVsPlayerGame;
 
 },{}],47:[function(require,module,exports){
@@ -18283,10 +18280,6 @@ UI.prototype.displayTurn = function(marker) {
   playerMarker = marker;
 }
 
-UI.prototype.makeMove = function(marker) {
-  $("#turn-label").html(marker + "'s turn!");
-}
-
 UI.prototype.listenForSpotClick = function(spotClicked) {
   this.callOnElementClick(".spot", spotClicked);
 }
@@ -18295,11 +18288,22 @@ UI.prototype.callOnElementClick = function(element, callback) {
   $(element).on("click", function(e) {
     var id = callback(e);
     UI.prototype.displayMarker(id, playerMarker);
+    playerMarker = UI.prototype.switchMarker(playerMarker);
+    UI.prototype.displayTurn(playerMarker);
   });
 }
 
 UI.prototype.displayMarker = function(id, playerMarker) {
   $("#" + id).html(playerMarker);
+}
+
+UI.prototype.switchMarker = function(playerMarker) {
+  if (playerMarker == "X") {
+    playerMarker = "O";
+  } else {
+    playerMarker = "X";
+  }
+  return playerMarker;
 }
 
 module.exports = UI;

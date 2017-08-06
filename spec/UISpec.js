@@ -19,6 +19,11 @@ describe("UI", function() {
       $("#0").trigger("click");
       expect($("#0")).toHaveText("X");
     });
-    
+
+    it("can switch the marker to be displayed", function() {
+      var marker = "X"
+      expect(ui.switchMarker(marker)).toEqual("O");
+    });
+
   });
 });
