@@ -18232,7 +18232,7 @@ var TicTacToe = function() {
 TicTacToe.prototype.main = function() {
 
   this.ui = new UI();
-  ui.listenForSpotClick(TicTacToe.prototype.spotClicked);
+  this.ui.listenForSpotClick(TicTacToe.prototype.spotClicked);
   this.game = new PlayerVsPlayerGame(ui);
   this.game.play();
 }
@@ -18240,6 +18240,7 @@ TicTacToe.prototype.main = function() {
 TicTacToe.prototype.spotClicked = function(e) {
   var id = parseInt($(e.target).attr("id"));
   console.log("SPOT CLICKED WITH ID: " + id);
+  return id;
 }
 
 
@@ -18253,6 +18254,9 @@ function PlayerVsPlayerGame(ui) {
 PlayerVsPlayerGame.prototype.play = function() {
   this.ui.displayTurn("X");
 }
+
+
+
 
 module.exports = PlayerVsPlayerGame;
 
@@ -18271,20 +18275,31 @@ $(document).ready(function() {
 var $ = require('jquery');
 
 function UI() {
+  var playerMarker = ""
 }
 
 UI.prototype.displayTurn = function(marker) {
   $("#turn-label").html(marker + "'s turn!");
+  playerMarker = marker;
 }
 
-UI.prototype.listenForSpotClick = function(makeMove) {
-  this.callOnElementClick(".spot", makeMove);
+UI.prototype.makeMove = function(marker) {
+  $("#turn-label").html(marker + "'s turn!");
+}
+
+UI.prototype.listenForSpotClick = function(spotClicked) {
+  this.callOnElementClick(".spot", spotClicked);
 }
 
 UI.prototype.callOnElementClick = function(element, callback) {
   $(element).on("click", function(e) {
-    callback(e);
+    var id = callback(e);
+    UI.prototype.displayMarker(id, playerMarker);
   });
+}
+
+UI.prototype.displayMarker = function(id, playerMarker) {
+  $("#" + id).html(playerMarker);
 }
 
 module.exports = UI;

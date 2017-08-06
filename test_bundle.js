@@ -11115,9 +11115,9 @@ describe("PlayerVsPlayerGame", function() {
       game.play();
     });
 
-    // it ("can display the current players turn", function() {
-    //   expect(mockUI.statusText).toEqual("X's Turn!");
-    // });
+    it ("can display the current players turn", function() {
+      expect(mockUI.statusText).toEqual("X's Turn!");
+    });
   });
 });
 
@@ -11133,16 +11133,17 @@ describe("UI", function() {
   });
 
   describe("#Game", function(){
-    it("display the turn if it's Xs turn", function() {
+    it("can display the turn if it's Xs turn", function() {
       ui.displayTurn("X");
-      expect($("#turn-label")).toHaveText("X wins!!");
+      expect($("#turn-label")).toHaveText("X's turn!");
     });
 
-    it("display the turn if it's W's turn", function() {
-      ui.displayTurn("W");
-      expect($("#turn-label")).toHaveText("W wins!!");
+    it("can display a marker when a spot is clicked", function() {
+      ui.listenForSpotClick(function(e){$(e.target).html("X")});
+      $("#0").trigger("click");
+      expect($("#0")).toHaveText("X");
     });
-
+    
   });
 });
 
@@ -11173,26 +11174,40 @@ PlayerVsPlayerGame.prototype.play = function() {
   this.ui.displayTurn("X");
 }
 
+
+
+
 module.exports = PlayerVsPlayerGame;
 
 },{}],8:[function(require,module,exports){
 var $ = require('jquery');
 
 function UI() {
+  var playerMarker = ""
 }
 
 UI.prototype.displayTurn = function(marker) {
   $("#turn-label").html(marker + "'s turn!");
+  playerMarker = marker;
 }
 
-UI.prototype.listenForSpotClick = function(makeMove) {
-  this.callOnElementClick(".spot", makeMove);
+UI.prototype.makeMove = function(marker) {
+  $("#turn-label").html(marker + "'s turn!");
+}
+
+UI.prototype.listenForSpotClick = function(spotClicked) {
+  this.callOnElementClick(".spot", spotClicked);
 }
 
 UI.prototype.callOnElementClick = function(element, callback) {
   $(element).on("click", function(e) {
-    callback(e);
+    var id = callback(e);
+    UI.prototype.displayMarker(id, playerMarker);
   });
+}
+
+UI.prototype.displayMarker = function(id, playerMarker) {
+  $("#" + id).html(playerMarker);
 }
 
 module.exports = UI;
