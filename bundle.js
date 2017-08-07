@@ -18222,19 +18222,16 @@ module.exports = HandlebarsCompiler;
 
 },{"handlebars":31,"jquery":32}],45:[function(require,module,exports){
 var $ = require('jquery');
-var UI = require('./ui');
 var PlayerVsPlayerGame = require('./games/PlayerVsPlayerGame');
+var UI = require('./ui');
 
 var TicTacToe = function() {
-
 }
 
 TicTacToe.prototype.main = function() {
-
   this.ui = new UI();
-  this.ui.listenForSpotClick(TicTacToe.prototype.spotClicked);
-  this.game = new PlayerVsPlayerGame(ui);
-  this.game.play();
+  this.game = new PlayerVsPlayerGame(this.ui);
+  this.game.play(TicTacToe.prototype.spotClicked);
 }
 
 TicTacToe.prototype.spotClicked = function(e) {
@@ -18243,21 +18240,37 @@ TicTacToe.prototype.spotClicked = function(e) {
   return id;
 }
 
-
 module.exports = TicTacToe;
 
 },{"./games/PlayerVsPlayerGame":46,"./ui":48,"jquery":32}],46:[function(require,module,exports){
+var $ = require('jquery')
+
 function PlayerVsPlayerGame(ui) {
   this.ui = ui;
 }
 
-PlayerVsPlayerGame.prototype.play = function() {
-  this.ui.displayTurn("X");
+PlayerVsPlayerGame.prototype.play = function(callback) {
+  var playerMarker = this.ui.displayTurn("X");
+  $(".spot").on("click", (e) => {
+    var id = callback(e);
+    this.ui.displayMarker(id, playerMarker);
+    playerMarker = PlayerVsPlayerGame.prototype.switchMarker(playerMarker);
+    this.ui.displayTurn(playerMarker);
+  });
+}
+
+PlayerVsPlayerGame.prototype.switchMarker = function(playerMarker) {
+  if (playerMarker == "X") {
+    playerMarker = "O";
+  } else {
+    playerMarker = "X";
+  }
+  return playerMarker;
 }
 
 module.exports = PlayerVsPlayerGame;
 
-},{}],47:[function(require,module,exports){
+},{"jquery":32}],47:[function(require,module,exports){
 var $ = require('jquery');
 var UI = require('./ui');
 var HandlebarsCompiler = require('./HandlebarsCompiler');
@@ -18272,38 +18285,15 @@ $(document).ready(function() {
 var $ = require('jquery');
 
 function UI() {
-  var playerMarker = ""
 }
 
 UI.prototype.displayTurn = function(marker) {
   $("#turn-label").html(marker + "'s turn!");
-  playerMarker = marker;
-}
-
-UI.prototype.listenForSpotClick = function(spotClicked) {
-  this.callOnElementClick(".spot", spotClicked);
-}
-
-UI.prototype.callOnElementClick = function(element, callback) {
-  $(element).on("click", function(e) {
-    var id = callback(e);
-    UI.prototype.displayMarker(id, playerMarker);
-    playerMarker = UI.prototype.switchMarker(playerMarker);
-    UI.prototype.displayTurn(playerMarker);
-  });
+  return marker;
 }
 
 UI.prototype.displayMarker = function(id, playerMarker) {
   $("#" + id).html(playerMarker);
-}
-
-UI.prototype.switchMarker = function(playerMarker) {
-  if (playerMarker == "X") {
-    playerMarker = "O";
-  } else {
-    playerMarker = "X";
-  }
-  return playerMarker;
 }
 
 module.exports = UI;

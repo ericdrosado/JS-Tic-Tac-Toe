@@ -11118,6 +11118,11 @@ describe("PlayerVsPlayerGame", function() {
     it ("can display the current players turn", function() {
       expect(mockUI.statusText).toEqual("X's Turn!");
     });
+
+    it("can switch the player marker to be displayed", function() {
+      var marker = "X";
+      expect(game.switchMarker(marker)).toEqual("O");
+    });
   });
 });
 
@@ -11138,17 +11143,10 @@ describe("UI", function() {
       expect($("#turn-label")).toHaveText("X's turn!");
     });
 
-    it("can display a marker when a spot is clicked", function() {
-      ui.listenForSpotClick(function(e){$(e.target).html("X")});
-      $("#0").trigger("click");
+    it("can set the marker to be displayed after a spot is clicked", function() {
+      ui.displayMarker("0", "X");
       expect($("#0")).toHaveText("X");
     });
-
-    it("can switch the marker to be displayed", function() {
-      var marker = "X"
-      expect(ui.switchMarker(marker)).toEqual("O");
-    });
-
   });
 });
 
@@ -11171,52 +11169,46 @@ require('./UISpec');
 require('./PlayerVsPlayerGameSpec');
 
 },{"../jasmine/lib/jasmine-jquery":1,"./PlayerVsPlayerGameSpec":3,"./UISpec":4,"jquery":2}],7:[function(require,module,exports){
+var $ = require('jquery')
+
 function PlayerVsPlayerGame(ui) {
   this.ui = ui;
 }
 
-PlayerVsPlayerGame.prototype.play = function() {
-  this.ui.displayTurn("X");
-}
-
-module.exports = PlayerVsPlayerGame;
-
-},{}],8:[function(require,module,exports){
-var $ = require('jquery');
-
-function UI() {
-  var playerMarker = ""
-}
-
-UI.prototype.displayTurn = function(marker) {
-  $("#turn-label").html(marker + "'s turn!");
-  playerMarker = marker;
-}
-
-UI.prototype.listenForSpotClick = function(spotClicked) {
-  this.callOnElementClick(".spot", spotClicked);
-}
-
-UI.prototype.callOnElementClick = function(element, callback) {
-  $(element).on("click", function(e) {
+PlayerVsPlayerGame.prototype.play = function(callback) {
+  var playerMarker = this.ui.displayTurn("X");
+  $(".spot").on("click", (e) => {
     var id = callback(e);
-    UI.prototype.displayMarker(id, playerMarker);
-    playerMarker = UI.prototype.switchMarker(playerMarker);
-    UI.prototype.displayTurn(playerMarker);
+    this.ui.displayMarker(id, playerMarker);
+    playerMarker = PlayerVsPlayerGame.prototype.switchMarker(playerMarker);
+    this.ui.displayTurn(playerMarker);
   });
 }
 
-UI.prototype.displayMarker = function(id, playerMarker) {
-  $("#" + id).html(playerMarker);
-}
-
-UI.prototype.switchMarker = function(playerMarker) {
+PlayerVsPlayerGame.prototype.switchMarker = function(playerMarker) {
   if (playerMarker == "X") {
     playerMarker = "O";
   } else {
     playerMarker = "X";
   }
   return playerMarker;
+}
+
+module.exports = PlayerVsPlayerGame;
+
+},{"jquery":2}],8:[function(require,module,exports){
+var $ = require('jquery');
+
+function UI() {
+}
+
+UI.prototype.displayTurn = function(marker) {
+  $("#turn-label").html(marker + "'s turn!");
+  return marker;
+}
+
+UI.prototype.displayMarker = function(id, playerMarker) {
+  $("#" + id).html(playerMarker);
 }
 
 module.exports = UI;
