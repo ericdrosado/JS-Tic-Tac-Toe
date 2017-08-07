@@ -9,15 +9,15 @@ describe("UI", function() {
   });
 
   describe("#Game", function(){
-    it("display the turn if it's Xs turn", function() {
+    it("can display the turn if it's Xs turn", function() {
       ui.displayTurn("X");
-      expect($("#turn-label")).toHaveText("X wins!!");
+      expect($("#turn-label")).toHaveText("X's turn!");
     });
 
-    it("display the turn if it's W's turn", function() {
-      ui.displayTurn("W");
-      expect($("#turn-label")).toHaveText("W wins!!");
+    it("can display a marker when a spot is clicked", function() {
+      ui.listenForSpotClick(function(e){$(e.target).html("X")});
+      $("#0").trigger("click");
+      expect($("#0")).toHaveText("X");
     });
-
   });
 });
