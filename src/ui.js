@@ -1,12 +1,12 @@
 var $ = require('jquery');
 
 function UI() {
-  var playerMarker = ""
+  this.playerMarker = ""
 }
 
 UI.prototype.displayTurn = function(marker) {
   $("#turn-label").html(marker + "'s turn!");
-  playerMarker = marker;
+  this.playerMarker = marker;
 }
 
 UI.prototype.makeMove = function(marker) {
@@ -18,14 +18,14 @@ UI.prototype.listenForSpotClick = function(spotClicked) {
 }
 
 UI.prototype.callOnElementClick = function(element, callback) {
-  $(element).on("click", function(e) {
+  $(element).on("click", (e) => {
     var id = callback(e);
-    UI.prototype.displayMarker(id, playerMarker);
+    UI.prototype.displayMarker(id, this.playerMarker);
   });
 }
 
-UI.prototype.displayMarker = function(id, playerMarker) {
-  $("#" + id).html(playerMarker);
+UI.prototype.displayMarker = function(id, marker) {
+  $("#" + id).html(marker);
 }
 
 module.exports = UI;
