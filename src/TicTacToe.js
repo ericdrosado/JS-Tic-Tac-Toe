@@ -3,11 +3,9 @@ var UI = require('./ui');
 var PlayerVsPlayerGame = require('./games/PlayerVsPlayerGame');
 
 var TicTacToe = function() {
-
 }
 
 TicTacToe.prototype.main = function() {
-
   this.ui = new UI();
   this.ui.listenForSpotClick(TicTacToe.prototype.spotClicked);
   this.game = new PlayerVsPlayerGame(ui);

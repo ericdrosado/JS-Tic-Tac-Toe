@@ -24,6 +24,5 @@ describe("UI", function() {
       var marker = "X"
       expect(ui.switchMarker(marker)).toEqual("O");
     });
-
   });
 });
