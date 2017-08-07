@@ -18226,11 +18226,9 @@ var UI = require('./ui');
 var PlayerVsPlayerGame = require('./games/PlayerVsPlayerGame');
 
 var TicTacToe = function() {
-
 }
 
 TicTacToe.prototype.main = function() {
-
   this.ui = new UI();
   this.ui.listenForSpotClick(TicTacToe.prototype.spotClicked);
   this.game = new PlayerVsPlayerGame(ui);
@@ -18243,7 +18241,6 @@ TicTacToe.prototype.spotClicked = function(e) {
   return id;
 }
 
-
 module.exports = TicTacToe;
 
 },{"./games/PlayerVsPlayerGame":46,"./ui":48,"jquery":32}],46:[function(require,module,exports){
@@ -18254,9 +18251,6 @@ function PlayerVsPlayerGame(ui) {
 PlayerVsPlayerGame.prototype.play = function() {
   this.ui.displayTurn("X");
 }
-
-
-
 
 module.exports = PlayerVsPlayerGame;
 

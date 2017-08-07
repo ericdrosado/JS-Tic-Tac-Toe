@@ -19,6 +19,5 @@ describe("UI", function() {
       $("#0").trigger("click");
       expect($("#0")).toHaveText("X");
     });
-    
   });
 });

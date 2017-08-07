@@ -11143,7 +11143,6 @@ describe("UI", function() {
       $("#0").trigger("click");
       expect($("#0")).toHaveText("X");
     });
-    
   });
 });
 
@@ -11173,9 +11172,6 @@ function PlayerVsPlayerGame(ui) {
 PlayerVsPlayerGame.prototype.play = function() {
   this.ui.displayTurn("X");
 }
-
-
-
 
 module.exports = PlayerVsPlayerGame;
 
