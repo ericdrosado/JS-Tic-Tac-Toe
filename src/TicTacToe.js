@@ -8,7 +8,7 @@ var TicTacToe = function() {
 TicTacToe.prototype.main = function() {
   this.ui = new UI();
   this.game = new PlayerVsPlayerGame(this.ui);
-  this.game.play(UI.prototype.spotClicked);
+  this.game.play();
 }
 
 module.exports = TicTacToe;
