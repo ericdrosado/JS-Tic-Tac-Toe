@@ -14,9 +14,8 @@ describe("UI", function() {
       expect($("#turn-label")).toHaveText("X's turn!");
     });
 
-    it("can display a marker when a spot is clicked", function() {
-      ui.listenForSpotClick(function(e){$(e.target).html("X")});
-      $("#0").trigger("click");
+    it("can set the marker to be displayed after a spot is clicked", function() {
+      ui.displayMarker("0", "X");
       expect($("#0")).toHaveText("X");
     });
   });
