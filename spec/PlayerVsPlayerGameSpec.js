@@ -10,16 +10,7 @@ describe("PlayerVsPlayerGame", function() {
     game = new PlayerVsPlayerGame(mockUI);
   });
 
-  describe("play", function() {
-
-    beforeEach(function() {
-      game.play();
-    });
-
-    it ("can display the current players turn", function() {
-      expect(mockUI.statusText).toEqual("X's Turn!");
-    });
-
+  describe("#switchMarker", function() {
     it("can switch the player marker to be displayed", function() {
       var marker = "X";
       expect(game.switchMarker(marker)).toEqual("O");
