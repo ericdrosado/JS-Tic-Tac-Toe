@@ -2,16 +2,15 @@ var $ = require('jquery');
 
 function PlayerVsPlayerGame(ui) {
   this.ui = ui;
-  this.playerMarker = this.ui.displayTurn("X");
 }
 
 PlayerVsPlayerGame.prototype.play = function() {
+  var playerMarker = "X";
+  this.ui.displayTurn("X");
   $(".spot").on("click", (e) => {
-    $(e.target).off('click');
-    var id = this.ui.spotClicked(e);
-    this.ui.displayMarker(id, this.playerMarker);
-    this.playerMarker = PlayerVsPlayerGame.prototype.switchMarker(this.playerMarker);
-    this.ui.displayTurn(this.playerMarker);
+    this.ui.updateBoard(e, playerMarker);
+    playerMarker = PlayerVsPlayerGame.prototype.switchMarker(playerMarker);
+    this.ui.displayTurn(playerMarker);
   });
 }
 
