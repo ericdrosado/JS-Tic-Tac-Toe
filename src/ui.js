@@ -3,6 +3,12 @@ var $ = require('jquery');
 function UI() {
 }
 
+UI.prototype.onSpotClicked = function(playerMarker, callback) {
+  $(".spot").on("click", (e) => {
+    callback(e, playerMarker);
+  });
+}
+
 UI.prototype.updateBoard = function(e, playerMarker) {
   UI.prototype.disableClick(e);
   var id = UI.prototype.spotClicked(e);
