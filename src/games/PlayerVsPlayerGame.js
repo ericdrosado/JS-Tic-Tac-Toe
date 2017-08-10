@@ -5,12 +5,12 @@ function PlayerVsPlayerGame(ui) {
 }
 
 PlayerVsPlayerGame.prototype.initializeGame = function() {
-  var playerMarker = "X";
-  this.ui.displayTurn(playerMarker);
-  this.ui.onSpotClicked(playerMarker, this.play);
+  this.ui.displayTurn("X");
+  this.ui.onSpotClicked(this.play);
 }
 
-PlayerVsPlayerGame.prototype.play = (playerMarker, e) => {
+PlayerVsPlayerGame.prototype.play = function(e) {
+  var playerMarker = "X";
   this.ui.updateBoard(e, playerMarker);
   playerMarker = PlayerVsPlayerGame.prototype.switchMarker(playerMarker);
   this.ui.displayTurn(playerMarker);

@@ -3,9 +3,9 @@ var $ = require('jquery');
 function UI() {
 }
 
-UI.prototype.onSpotClicked = function(playerMarker, callback) {
+UI.prototype.onSpotClicked = function(callback) {
   $(".spot").on("click", (e) => {
-    callback(e, playerMarker);
+    callback(e);
   });
 }
 
