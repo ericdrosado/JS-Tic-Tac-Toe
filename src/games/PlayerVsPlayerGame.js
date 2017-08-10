@@ -5,15 +5,15 @@ function PlayerVsPlayerGame(ui) {
 }
 
 PlayerVsPlayerGame.prototype.initializeGame = function() {
-  this.ui.displayTurn("X");
-  this.ui.onSpotClicked(this.play);
+  this.playerMarker = "X";
+  this.ui.displayTurn(this.playerMarker);
+  this.ui.onSpotClicked(this.play.bind(this));
 }
 
 PlayerVsPlayerGame.prototype.play = function(e) {
-  var playerMarker = "X";
-  this.ui.updateBoard(e, playerMarker);
-  playerMarker = PlayerVsPlayerGame.prototype.switchMarker(playerMarker);
-  this.ui.displayTurn(playerMarker);
+  this.ui.updateBoard(e, this.playerMarker);
+  this.playerMarker = PlayerVsPlayerGame.prototype.switchMarker(this.playerMarker);
+  this.ui.displayTurn(this.playerMarker);
 }
 
 PlayerVsPlayerGame.prototype.switchMarker = function(playerMarker) {
