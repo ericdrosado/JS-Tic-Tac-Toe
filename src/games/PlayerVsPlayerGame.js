@@ -11,7 +11,7 @@ PlayerVsPlayerGame.prototype.initializeGame = function() {
 }
 
 PlayerVsPlayerGame.prototype.play = function(e) {
-  this.ui.updateBoard(e, this.playerMarker);
+  this.ui.spotClicked(e, this.playerMarker);
   this.playerMarker = PlayerVsPlayerGame.prototype.switchMarker(this.playerMarker);
   this.ui.displayTurn(this.playerMarker);
 }

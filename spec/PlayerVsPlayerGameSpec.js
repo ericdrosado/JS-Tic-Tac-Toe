@@ -10,14 +10,6 @@ describe("PlayerVsPlayerGame", function() {
     game = new PlayerVsPlayerGame(mockUI);
   });
 
-  // describe("#play", function() {
-  //
-  //   beforeEach(function() {
-  //     game.play();
-  //   });
-  //
-  // });
-
   describe("#switchMarker", function() {
     it("can switch the player marker to be displayed", function() {
       var marker = "X";
