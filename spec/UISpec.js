@@ -15,6 +15,13 @@ describe("UI", function() {
     });
   });
 
+  describe("#displayWin", function() {
+    it("will display a win prompt", function() {
+      ui.displayWin("X");
+      expect($("#turn-label")).toHaveText("X Wins!");
+    });
+  });
+
   describe("#disableClick", function() {
     it("will disable click event for an occupied spot so the marker in that position will not change", function() {
       ui.onSpotClicked(ui.disableClick);
