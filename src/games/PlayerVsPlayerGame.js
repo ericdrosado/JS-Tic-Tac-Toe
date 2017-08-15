@@ -12,12 +12,13 @@ PlayerVsPlayerGame.prototype.initializeGame = function() {
 PlayerVsPlayerGame.prototype.play = function(e) {
   var id = this.ui.spotClicked(e, this.playerMarker);
   this.gameBoard[id] = this.playerMarker;
-  this.ui.displayTurn(this.playerMarker);
+
   if (PlayerVsPlayerGame.prototype.endGame(this.gameBoard)){
     this.ui.displayWin(this.playerMarker);
     this.ui.disableAllClicks();
   }
   this.playerMarker = PlayerVsPlayerGame.prototype.switchMarker(this.playerMarker);
+  this.ui.displayTurn(this.playerMarker);
 }
 
 PlayerVsPlayerGame.prototype.switchMarker = function(playerMarker) {
