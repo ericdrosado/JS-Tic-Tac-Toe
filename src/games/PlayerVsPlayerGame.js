@@ -1,5 +1,3 @@
-var $ = require('jquery');
-
 function PlayerVsPlayerGame(ui) {
   this.ui = ui;
 }
