@@ -22,7 +22,6 @@ UI.prototype.spotClicked = function(e, playerMarker) {
   UI.prototype.disableClick(e);
   UI.prototype.displayMarker(id, playerMarker);
   return id;
-  console.log("SPOT CLICKED WITH ID: " + id);
 }
 
 UI.prototype.disableClick = function(e){

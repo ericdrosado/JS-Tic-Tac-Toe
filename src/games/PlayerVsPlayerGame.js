@@ -30,11 +30,14 @@ PlayerVsPlayerGame.prototype.switchMarker = function(playerMarker) {
 }
 
 PlayerVsPlayerGame.prototype.endGame = function(gameBoard) {
+  return PlayerVsPlayerGame.prototype.isWinner(gameBoard);
+}
+
+PlayerVsPlayerGame.prototype.isWinner = function(gameBoard) {
   return PlayerVsPlayerGame.prototype.winHorizontalTop(gameBoard) || PlayerVsPlayerGame.prototype.winHorizontalMiddle(gameBoard) ||
         PlayerVsPlayerGame.prototype.winHorizontalBottom(gameBoard) || PlayerVsPlayerGame.prototype.winVerticalLeft(gameBoard) ||
         PlayerVsPlayerGame.prototype.winVerticalMiddle(gameBoard) || PlayerVsPlayerGame.prototype.winVerticalRight(gameBoard) ||
         PlayerVsPlayerGame.prototype.winDiagonalBackwards(gameBoard) || PlayerVsPlayerGame.prototype.winDiagonalForwards(gameBoard);
-    //Display end of game
 }
 
 PlayerVsPlayerGame.prototype.winHorizontalTop = function(gameBoard) {
