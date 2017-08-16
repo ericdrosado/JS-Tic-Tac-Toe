@@ -11,6 +11,10 @@ UI.prototype.displayWin = function(marker) {
   $("#turn-label").html(marker + " Wins!");
 }
 
+UI.prototype.displayTie = function() {
+  $("#turn-label").html("Tie Game!");
+}
+
 UI.prototype.onSpotClicked = function(callback) {
   $(".spot").on("click", (e) => {
     callback(e);

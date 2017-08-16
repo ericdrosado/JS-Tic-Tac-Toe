@@ -10,17 +10,6 @@ describe("PlayerVsPlayerGame", function() {
     game = new PlayerVsPlayerGame(mockUI);
   });
 
-  describe("#switchMarker", function() {
-    it("can switch the player marker to be displayed from X to O", function() {
-      var marker = "X";
-      expect(game.switchMarker(marker)).toEqual("O");
-    });
-    it("can switch the player marker to be displayed from O to X", function() {
-      var marker = "O";
-      expect(game.switchMarker(marker)).toEqual("X");
-    });
-  });
-
   describe("#isWinner", function() {
     it("will return true if player has three in a row", function() {
       var board = ["X","X","X","O","O","5","6","7","8"];
@@ -39,7 +28,6 @@ describe("PlayerVsPlayerGame", function() {
       expect(game.isWinner(board)).toBe(false);
     });
   });
-
 
   describe("#endGame", function() {
     it("will return true if player has three in a row", function() {
