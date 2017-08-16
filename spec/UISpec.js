@@ -22,6 +22,13 @@ describe("UI", function() {
     });
   });
 
+  describe("#displayTie", function() {
+    it("will display a tie prompt", function() {
+      ui.displayTie();
+      expect($("#turn-label")).toHaveText("Tie Game!");
+    });
+  });
+
   describe("#disableClick", function() {
     it("will disable click event for an occupied spot so the marker in that position will not change", function() {
       ui.onSpotClicked(ui.disableClick);

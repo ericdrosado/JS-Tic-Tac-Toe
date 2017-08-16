@@ -1,9 +1,9 @@
-function PlayerVsPlayerGame(ui) {
+function PlayerVsPlayerGame(ui, GameBoard) {
   this.ui = ui;
+  this.GameBoard = GameBoard;
 }
 
 PlayerVsPlayerGame.prototype.initializeGame = function() {
-  this.gameBoard = ["0","1","2","3","4","5","6","7","8"];
   this.playerMarker = "X";
   this.ui.displayTurn(this.playerMarker);
   this.ui.onSpotClicked(this.play.bind(this));
@@ -11,23 +11,16 @@ PlayerVsPlayerGame.prototype.initializeGame = function() {
 
 PlayerVsPlayerGame.prototype.play = function(e) {
   var id = this.ui.spotClicked(e, this.playerMarker);
-  this.gameBoard[id] = this.playerMarker;
-
-  if (PlayerVsPlayerGame.prototype.endGame(this.gameBoard)){
+  var gameBoard = this.GameBoard.updateBoard(id, this.playerMarker);
+  if (PlayerVsPlayerGame.prototype.endGame(gameBoard)){
     this.ui.displayWin(this.playerMarker);
     this.ui.disableAllClicks();
-  }
-  this.playerMarker = PlayerVsPlayerGame.prototype.switchMarker(this.playerMarker);
-  this.ui.displayTurn(this.playerMarker);
-}
-
-PlayerVsPlayerGame.prototype.switchMarker = function(playerMarker) {
-  if (playerMarker == "X") {
-    playerMarker = "O";
+  } else if (this.GameBoard.isBoardFull()) {
+    this.ui.displayTie();
   } else {
-    playerMarker = "X";
+  this.playerMarker = this.GameBoard.switchMarker(this.playerMarker);
+  this.ui.displayTurn(this.playerMarker);
   }
-  return playerMarker;
 }
 
 PlayerVsPlayerGame.prototype.endGame = function(gameBoard) {
