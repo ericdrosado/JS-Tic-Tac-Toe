@@ -1,9 +1,10 @@
 var $ = require('jquery');
-var UI = require('./ui');
+// var UI = require('./ui');
 var HandlebarsCompiler = require('./HandlebarsCompiler');
 var TicTacToe = require('./TicTacToe');
 
 $(document).ready(function() {
+  this.ticTacToe = new TicTacToe();
   var compiler = new HandlebarsCompiler();
-  compiler.load("game",TicTacToe.prototype.main);
+  var gameType = compiler.load("menu",TicTacToe.prototype.menu);
 });
