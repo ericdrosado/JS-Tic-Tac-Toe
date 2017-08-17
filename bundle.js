@@ -303,7 +303,7 @@ function amdefine(module, requireFn) {
 module.exports = amdefine;
 
 }).call(this,require('_process'),"/node_modules/amdefine/amdefine.js")
-},{"_process":52,"path":51}],2:[function(require,module,exports){
+},{"_process":53,"path":52}],2:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -5003,7 +5003,7 @@ if (typeof require !== 'undefined' && require.extensions) {
   require.extensions['.hbs'] = extension;
 }
 
-},{"../dist/cjs/handlebars":2,"../dist/cjs/handlebars/compiler/printer":12,"fs":50}],32:[function(require,module,exports){
+},{"../dist/cjs/handlebars":2,"../dist/cjs/handlebars/compiler/printer":12,"fs":51}],32:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.2.1
  * https://jquery.com/
@@ -18249,9 +18249,10 @@ module.exports = HandlebarsCompiler;
 
 },{"handlebars":31,"jquery":32}],46:[function(require,module,exports){
 var $ = require('jquery');
+var GameBoard = require('./GameBoard');
 var PlayerVsPlayerGame = require('./games/PlayerVsPlayerGame');
 var UI = require('./ui');
-var GameBoard = require('./GameBoard');
+var WinConditions = require('./WinConditions');
 
 var TicTacToe = function() {
 }
@@ -18259,16 +18260,67 @@ var TicTacToe = function() {
 TicTacToe.prototype.main = function() {
   this.ui = new UI();
   this.GameBoard = new GameBoard();
-  this.game = new PlayerVsPlayerGame(this.ui, this.GameBoard);
+  this.WinConditions = new WinConditions();
+  this.game = new PlayerVsPlayerGame(this.ui, this.GameBoard, this.WinConditions);
   this.game.initializeGame();
 }
 
 module.exports = TicTacToe;
 
-},{"./GameBoard":44,"./games/PlayerVsPlayerGame":47,"./ui":49,"jquery":32}],47:[function(require,module,exports){
-function PlayerVsPlayerGame(ui, GameBoard) {
+},{"./GameBoard":44,"./WinConditions":47,"./games/PlayerVsPlayerGame":48,"./ui":50,"jquery":32}],47:[function(require,module,exports){
+function WinConditions() {
+}
+
+WinConditions.prototype.endGame = function(gameBoard) {
+  return WinConditions.prototype.isWinner(gameBoard);
+}
+
+WinConditions.prototype.isWinner = function(gameBoard) {
+  return WinConditions.prototype.winHorizontalTop(gameBoard) || WinConditions.prototype.winHorizontalMiddle(gameBoard) ||
+        WinConditions.prototype.winHorizontalBottom(gameBoard) || WinConditions.prototype.winVerticalLeft(gameBoard) ||
+        WinConditions.prototype.winVerticalMiddle(gameBoard) || WinConditions.prototype.winVerticalRight(gameBoard) ||
+        WinConditions.prototype.winDiagonalBackwards(gameBoard) || WinConditions.prototype.winDiagonalForwards(gameBoard);
+}
+
+WinConditions.prototype.winHorizontalTop = function(gameBoard) {
+  return gameBoard[0] === gameBoard[1] && gameBoard[1] === gameBoard[2];
+}
+
+WinConditions.prototype.winHorizontalMiddle = function(gameBoard) {
+  return gameBoard[3] === gameBoard[4] && gameBoard[4] === gameBoard[5];
+}
+
+WinConditions.prototype.winHorizontalBottom = function(gameBoard) {
+  return gameBoard[6] === gameBoard[7] && gameBoard[7] === gameBoard[8];
+}
+
+WinConditions.prototype.winVerticalLeft = function(gameBoard) {
+  return gameBoard[0] === gameBoard[3] && gameBoard[3] === gameBoard[6];
+}
+
+WinConditions.prototype.winVerticalMiddle = function(gameBoard) {
+  return gameBoard[1] === gameBoard[4] && gameBoard[4] === gameBoard[7];
+}
+
+WinConditions.prototype.winVerticalRight = function(gameBoard) {
+  return gameBoard[2] === gameBoard[5] && gameBoard[5] === gameBoard[8];
+}
+
+WinConditions.prototype.winDiagonalBackwards = function(gameBoard) {
+  return gameBoard[0] === gameBoard[4] && gameBoard[4] === gameBoard[8];
+}
+
+WinConditions.prototype.winDiagonalForwards = function(gameBoard) {
+  return gameBoard[2] === gameBoard[4] && gameBoard[4] === gameBoard[6];
+}
+
+module.exports = WinConditions;
+
+},{}],48:[function(require,module,exports){
+function PlayerVsPlayerGame(ui, GameBoard, WinConditions) {
   this.ui = ui;
   this.GameBoard = GameBoard;
+  this.WinConditions = WinConditions;
 }
 
 PlayerVsPlayerGame.prototype.initializeGame = function() {
@@ -18280,7 +18332,7 @@ PlayerVsPlayerGame.prototype.initializeGame = function() {
 PlayerVsPlayerGame.prototype.play = function(e) {
   var id = this.ui.spotClicked(e, this.playerMarker);
   var gameBoard = this.GameBoard.updateBoard(id, this.playerMarker);
-  if (PlayerVsPlayerGame.prototype.endGame(gameBoard)){
+  if (this.WinConditions.endGame(gameBoard)){
     this.ui.displayWin(this.playerMarker);
     this.ui.disableAllClicks();
   } else if (this.GameBoard.isBoardFull()) {
@@ -18291,52 +18343,9 @@ PlayerVsPlayerGame.prototype.play = function(e) {
   }
 }
 
-PlayerVsPlayerGame.prototype.endGame = function(gameBoard) {
-  return PlayerVsPlayerGame.prototype.isWinner(gameBoard);
-}
-
-PlayerVsPlayerGame.prototype.isWinner = function(gameBoard) {
-  return PlayerVsPlayerGame.prototype.winHorizontalTop(gameBoard) || PlayerVsPlayerGame.prototype.winHorizontalMiddle(gameBoard) ||
-        PlayerVsPlayerGame.prototype.winHorizontalBottom(gameBoard) || PlayerVsPlayerGame.prototype.winVerticalLeft(gameBoard) ||
-        PlayerVsPlayerGame.prototype.winVerticalMiddle(gameBoard) || PlayerVsPlayerGame.prototype.winVerticalRight(gameBoard) ||
-        PlayerVsPlayerGame.prototype.winDiagonalBackwards(gameBoard) || PlayerVsPlayerGame.prototype.winDiagonalForwards(gameBoard);
-}
-
-PlayerVsPlayerGame.prototype.winHorizontalTop = function(gameBoard) {
-  return gameBoard[0] === gameBoard[1] && gameBoard[1] === gameBoard[2];
-}
-
-PlayerVsPlayerGame.prototype.winHorizontalMiddle = function(gameBoard) {
-  return gameBoard[3] === gameBoard[4] && gameBoard[4] === gameBoard[5];
-}
-
-PlayerVsPlayerGame.prototype.winHorizontalBottom = function(gameBoard) {
-  return gameBoard[6] === gameBoard[7] && gameBoard[7] === gameBoard[8];
-}
-
-PlayerVsPlayerGame.prototype.winVerticalLeft = function(gameBoard) {
-  return gameBoard[0] === gameBoard[3] && gameBoard[3] === gameBoard[6];
-}
-
-PlayerVsPlayerGame.prototype.winVerticalMiddle = function(gameBoard) {
-  return gameBoard[1] === gameBoard[4] && gameBoard[4] === gameBoard[7];
-}
-
-PlayerVsPlayerGame.prototype.winVerticalRight = function(gameBoard) {
-  return gameBoard[2] === gameBoard[5] && gameBoard[5] === gameBoard[8];
-}
-
-PlayerVsPlayerGame.prototype.winDiagonalBackwards = function(gameBoard) {
-  return gameBoard[0] === gameBoard[4] && gameBoard[4] === gameBoard[8];
-}
-
-PlayerVsPlayerGame.prototype.winDiagonalForwards = function(gameBoard) {
-  return gameBoard[2] === gameBoard[4] && gameBoard[4] === gameBoard[6];
-}
-
 module.exports = PlayerVsPlayerGame;
 
-},{}],48:[function(require,module,exports){
+},{}],49:[function(require,module,exports){
 var $ = require('jquery');
 var UI = require('./ui');
 var HandlebarsCompiler = require('./HandlebarsCompiler');
@@ -18347,7 +18356,7 @@ $(document).ready(function() {
   compiler.load("game",TicTacToe.prototype.main);
 });
 
-},{"./HandlebarsCompiler":45,"./TicTacToe":46,"./ui":49,"jquery":32}],49:[function(require,module,exports){
+},{"./HandlebarsCompiler":45,"./TicTacToe":46,"./ui":50,"jquery":32}],50:[function(require,module,exports){
 var $ = require('jquery');
 
 function UI() {
@@ -18392,9 +18401,9 @@ UI.prototype.displayMarker = function(id, playerMarker) {
 
 module.exports = UI;
 
-},{"jquery":32}],50:[function(require,module,exports){
+},{"jquery":32}],51:[function(require,module,exports){
 
-},{}],51:[function(require,module,exports){
+},{}],52:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -18622,7 +18631,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":52}],52:[function(require,module,exports){
+},{"_process":53}],53:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -18808,4 +18817,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[48]);
+},{}]},{},[49]);
