@@ -20,13 +20,13 @@ PlayerVsComputerGame.prototype.play = function(e) {
       this.ui.displayTie();
   } else {
       this.playerMarker = this.GameBoard.switchMarker(this.playerMarker);
-      PlayerVsComputerGame.prototype.simpleAI(this.ui, this.GameBoard, this.playerMarker);
+      PlayerVsComputerGame.prototype.pickRandomSpaceForAI(this.ui, this.GameBoard, this.playerMarker);
       this.playerMarker = this.GameBoard.switchMarker(this.playerMarker);
       this.ui.displayTurn(this.playerMarker);
   }
 }
 
-PlayerVsComputerGame.prototype.simpleAI = function(ui, gameBoard, marker) {
+PlayerVsComputerGame.prototype.pickRandomSpaceForAI = function(ui, gameBoard, marker) {
   var space = gameBoard.chooseAvailableSpace();
   ui.displayMarker(space, marker);
   gameBoard.updateBoard(space, marker);

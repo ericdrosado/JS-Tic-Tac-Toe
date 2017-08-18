@@ -24,8 +24,7 @@ GameBoard.prototype.switchMarker = function(playerMarker) {
 
 GameBoard.prototype.chooseAvailableSpace = function() {
   for (i = 0; i <= 8; i++) {
-    var num = this.gameBoard[i].match(/[0-8]/);
-    if (this.gameBoard[i] == num ) {
+    if (this.gameBoard[i] == i ) {
         return this.gameBoard[i];
     }
   }
