@@ -1,5 +1,4 @@
 var $ = require('jquery');
-// var UI = require('./ui');
 var HandlebarsCompiler = require('./HandlebarsCompiler');
 var TicTacToe = require('./TicTacToe');
 

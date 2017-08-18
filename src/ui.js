@@ -43,6 +43,10 @@ UI.prototype.disableClick = function(e){
   $(e.target).addClass("disabled").off("click");
 }
 
+UI.prototype.disableClickWithID = function(id){
+  $(id).addClass("disabled").off("click");
+}
+
 UI.prototype.disableAllClicks = function () {
   $(".spot").addClass("disabled").off("click");
 }

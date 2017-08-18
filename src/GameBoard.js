@@ -22,4 +22,13 @@ GameBoard.prototype.switchMarker = function(playerMarker) {
   return playerMarker;
 }
 
+GameBoard.prototype.chooseAvailableSpace = function() {
+  for (i = 0; i <= 8; i++) {
+    var num = this.gameBoard[i].match(/[0-8]/);
+    if (this.gameBoard[i] == num ) {
+        return this.gameBoard[i];
+    }
+  }
+}
+
 module.exports = GameBoard;
