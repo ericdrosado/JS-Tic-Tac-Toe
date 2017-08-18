@@ -1,4 +1,5 @@
 var $ = require('jquery');
+var ComputerLogic = require('./ComputerLogic');
 var GameBoard = require('./GameBoard');
 var HandlebarsCompiler = require('./HandlebarsCompiler');
 var PlayerVsComputerGame = require('./games/PlayerVsComputerGame');
@@ -26,7 +27,7 @@ TicTacToe.prototype.determineGameType = function(e) {
 }
 
 TicTacToe.prototype.playerVsPlayerGame = function() {
-  this.ui = new UI;
+  this.ui = new UI();
   this.GameBoard = new GameBoard();
   this.WinConditions = new WinConditions();
   this.game = new PlayerVsPlayerGame(this.ui, this.GameBoard, this.WinConditions);
@@ -34,10 +35,11 @@ TicTacToe.prototype.playerVsPlayerGame = function() {
 }
 
 TicTacToe.prototype.playerVsComputerGame = function() {
-  this.ui = new UI;
+  this.ComputerLogic = new ComputerLogic();
+  this.ui = new UI();
   this.GameBoard = new GameBoard();
   this.WinConditions = new WinConditions();
-  this.game = new PlayerVsComputerGame(this.ui, this.GameBoard, this.WinConditions);
+  this.game = new PlayerVsComputerGame(this.ComputerLogic, this.ui, this.GameBoard, this.WinConditions);
   this.game.initializeGame();
 }
 

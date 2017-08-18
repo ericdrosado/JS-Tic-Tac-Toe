@@ -1,4 +1,5 @@
-function PlayerVsComputerGame(ui, GameBoard, WinConditions) {
+function PlayerVsComputerGame(ComputerLogic, ui, GameBoard, WinConditions) {
+  this.ComputerLogic = ComputerLogic;
   this.ui = ui;
   this.GameBoard = GameBoard;
   this.WinConditions = WinConditions;
@@ -20,17 +21,10 @@ PlayerVsComputerGame.prototype.play = function(e) {
       this.ui.displayTie();
   } else {
       this.playerMarker = this.GameBoard.switchMarker(this.playerMarker);
-      PlayerVsComputerGame.prototype.pickRandomSpaceForAI(this.ui, this.GameBoard, this.playerMarker);
+      this.ComputerLogic.pickRandomSpace(this.ui, this.GameBoard, this.playerMarker);
       this.playerMarker = this.GameBoard.switchMarker(this.playerMarker);
       this.ui.displayTurn(this.playerMarker);
   }
-}
-
-PlayerVsComputerGame.prototype.pickRandomSpaceForAI = function(ui, gameBoard, marker) {
-  var space = gameBoard.chooseAvailableSpace();
-  ui.displayMarker(space, marker);
-  gameBoard.updateBoard(space, marker);
-  ui.disableClickWithID(space);
 }
 
 module.exports = PlayerVsComputerGame;
