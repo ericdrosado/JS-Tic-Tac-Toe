@@ -12,35 +12,22 @@ var TicTacToe = function() {
 
 TicTacToe.prototype.menu = function() {
   this.ui = new UI();
-  this.ui.onButtonClicked(TicTacToe.prototype.determineGameType);
+  this.ui.onButtonClicked(TicTacToe.prototype.determineGameType, this.ui);
 }
 
-TicTacToe.prototype.determineGameType = function(e) {
-  this.ui = new UI();
-  var compiler = new HandlebarsCompiler();
-  var id = this.ui.menuButtonClicked(e);
+TicTacToe.prototype.determineGameType = function(e, ui) {
+  var game;
+  this.gameBoard = new GameBoard();
+  this.winConditions = new WinConditions();
+  var id = ui.menuButtonClicked(e);
   if (id === "PvP") {
-    compiler.load("game", TicTacToe.prototype.playerVsPlayerGame);
+    game = new PlayerVsPlayerGame(ui, this.gameBoard, this.winConditions);
   } else {
-    compiler.load("game", TicTacToe.prototype.playerVsComputerGame);
+      this.computerLogic = new ComputerLogic();
+      game = new PlayerVsComputerGame(this.computerLogic, ui, this.gameBoard, this.winConditions);
   }
-}
-
-TicTacToe.prototype.playerVsPlayerGame = function() {
-  this.ui = new UI();
-  this.GameBoard = new GameBoard();
-  this.WinConditions = new WinConditions();
-  this.game = new PlayerVsPlayerGame(this.ui, this.GameBoard, this.WinConditions);
-  this.game.initializeGame();
-}
-
-TicTacToe.prototype.playerVsComputerGame = function() {
-  this.ComputerLogic = new ComputerLogic();
-  this.ui = new UI();
-  this.GameBoard = new GameBoard();
-  this.WinConditions = new WinConditions();
-  this.game = new PlayerVsComputerGame(this.ComputerLogic, this.ui, this.GameBoard, this.WinConditions);
-  this.game.initializeGame();
+  var compiler = new HandlebarsCompiler();
+  compiler.load("game", game.initializeGame);
 }
 
 module.exports = TicTacToe;
