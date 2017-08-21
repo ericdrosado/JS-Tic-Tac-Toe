@@ -2,7 +2,6 @@ var $ = require('jquery');
 var Handlebars = require('handlebars');
 
 function HandlebarsCompiler() {
-
 }
 
 HandlebarsCompiler.prototype.load = function(templateName, onCompletion) {

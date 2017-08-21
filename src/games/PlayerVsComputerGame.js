@@ -1,16 +1,17 @@
-function PlayerVsPlayerGame(ui, gameBoard, winConditions) {
+function PlayerVsComputerGame(computerLogic, ui, gameBoard, winConditions) {
+  this.computerLogic = computerLogic;
   this.ui = ui;
   this.gameBoard = gameBoard;
   this.winConditions = winConditions;
 }
 
-PlayerVsPlayerGame.prototype.initializeGame = function() {
+PlayerVsComputerGame.prototype.initializeGame = function() {
   this.playerMarker = "X";
   this.ui.displayTurn(this.playerMarker);
-  this.ui.onSpotClicked(PlayerVsPlayerGame.prototype.play.bind(this));
+  this.ui.onSpotClicked(PlayerVsComputerGame.prototype.play.bind(this));
 }
 
-PlayerVsPlayerGame.prototype.play = function(e) {
+PlayerVsComputerGame.prototype.play = function(e) {
   var id = this.ui.spotClicked(e, this.playerMarker);
   var gameBoard = this.gameBoard.updateBoard(id, this.playerMarker);
   if (this.winConditions.endGame(gameBoard)){
@@ -20,8 +21,10 @@ PlayerVsPlayerGame.prototype.play = function(e) {
       this.ui.displayTie();
   } else {
       this.playerMarker = this.gameBoard.switchMarker(this.playerMarker);
+      this.computerLogic.pickRandomSpace(this.ui, this.gameBoard, this.playerMarker);
+      this.playerMarker = this.gameBoard.switchMarker(this.playerMarker);
       this.ui.displayTurn(this.playerMarker);
   }
 }
 
-module.exports = PlayerVsPlayerGame;
+module.exports = PlayerVsComputerGame;

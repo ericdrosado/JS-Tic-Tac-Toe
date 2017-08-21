@@ -28,8 +28,23 @@ UI.prototype.spotClicked = function(e, playerMarker) {
   return id;
 }
 
+UI.prototype.onButtonClicked = function(callback, ui) {
+  $(".button").on("click", (e) => {
+    callback(e, ui);
+  });
+}
+
+UI.prototype.menuButtonClicked = function(e) {
+  var id = $(e.target).attr("id");
+  return id;
+}
+
 UI.prototype.disableClick = function(e){
   $(e.target).addClass("disabled").off("click");
+}
+
+UI.prototype.disableClickWithID = function(id){
+  $("#"+id).addClass("disabled").off("click");
 }
 
 UI.prototype.disableAllClicks = function () {

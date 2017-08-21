@@ -37,6 +37,14 @@ describe("UI", function() {
     });
   });
 
+  describe("#disableClickWithID", function() {
+    it("will disable click with ID for an occupied spot so the marker in that position will not change", function() {
+      var id = "0"
+      ui.disableClickWithID(id);
+      expect($("#0")).toHaveClass("disabled");
+    });
+  });
+
   describe("#displayMarker", function() {
     it("can set the marker to be displayed after a spot is clicked", function() {
       ui.displayMarker("0", "X");
