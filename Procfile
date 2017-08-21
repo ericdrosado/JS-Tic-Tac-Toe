@@ -1,1 +1,1 @@
-web: python -m SimpleHTTPServer $PORT
+web: node index.js
