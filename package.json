@@ -4,7 +4,8 @@
   "description": "Tic tac toe client in JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "testem"
+    "test": "testem",
+    "start": "python -m SimpleHTTPServer $PORT"
   },
   "repository": {
     "type": "git",
