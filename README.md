@@ -1,6 +1,6 @@
-# Becca and Tom's Tic Tac Toe Javascript Client [![Build Status](https://travis-ci.org/beccanelson/tttaas-js.svg?branch=master)](https://travis-ci.org/beccanelson/tttaas-js)
+# Eric's Tic Tac Toe Game [![Build Status](https://travis-ci.org/ericdrosado/JS-Tic-Tac-Toe.svg?branch=master)](https://travis-ci.org/ericdrosado/JS-Tic-Tac-Toe)
 
-[Click here](http://beccanelson.is/tttaas-js) to play!
+[Click here](https://erics-tic-tac-toe.herokuapp.com) to play!
 
 ## To play game locally:
 
@@ -30,5 +30,5 @@ browserify src/main.js -o bundle.js
 
 # NOTES
 
-to run the tests right now with updated js you need to run this before `testem`: 
+to run the tests right now with updated js you need to run this before `testem`:
 `browserify src/main.js -o bundle.js
