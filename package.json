@@ -3,11 +3,7 @@
   "version": "1.0.0",
   "description": "Tic tac toe client in JavaScript",
   "main": "index.js",
-  "engines": {
-    "node":"6.11.2"
-  },
   "scripts": {
-    "preinstall": "browserify src/index.js -o bundle.js",
     "test": "testem",
     "start": "python -m SimpleHTTPServer $PORT"
   },
