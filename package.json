@@ -9,7 +9,7 @@
   "scripts": {
     "test": "testem",
     "start": "python -m SimpleHTTPServer $PORT",
-    "heroku-postbuild": "browserify source/index.js -o bundle.js"
+    "heroku-postbuild": "browserify src/index.js -o bundle.js"
   },
   "repository": {
     "type": "git",
