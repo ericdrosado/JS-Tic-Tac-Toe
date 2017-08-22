@@ -3,6 +3,8 @@ function GameBoard() {
   this.spacesAvailable = 9;
 }
 
+//inside
+
 GameBoard.prototype.updateBoard = function(id, playerMarker) {
   this.gameBoard[id] = playerMarker;
   this.spacesAvailable -= 1;
