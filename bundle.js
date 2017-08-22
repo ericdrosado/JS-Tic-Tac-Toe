@@ -18216,10 +18216,13 @@ function GameBoard() {
   this.spacesAvailable = 9;
 }
 
+GameBoard.prototype.getBoard = function() {
+  return this.gameBoard;
+}
+
 GameBoard.prototype.updateBoard = function(id, playerMarker) {
   this.gameBoard[id] = playerMarker;
   this.spacesAvailable -= 1;
-  return this.gameBoard;
 }
 
 GameBoard.prototype.isBoardFull = function() {
@@ -18353,31 +18356,39 @@ module.exports = WinConditions;
 
 },{}],49:[function(require,module,exports){
 function PlayerVsComputerGame(computerLogic, ui, gameBoard, winConditions) {
-  this.computerLogic = computerLogic;
-  this.ui = ui;
-  this.gameBoard = gameBoard;
-  this.winConditions = winConditions;
+  var self = this;
+  self.computerLogic = computerLogic;
+  self.ui = ui;
+  self.gameBoard = gameBoard;
+  self.winConditions = winConditions;
 }
 
 PlayerVsComputerGame.prototype.initializeGame = function() {
   this.playerMarker = "X";
-  this.ui.displayTurn(this.playerMarker);
-  this.ui.onSpotClicked(PlayerVsComputerGame.prototype.play.bind(this));
+  self.ui.displayTurn(self.playerMarker);
+  self.ui.onSpotClicked(PlayerVsComputerGame.prototype.play);
 }
 
 PlayerVsComputerGame.prototype.play = function(e) {
-  var id = this.ui.spotClicked(e, this.playerMarker);
-  var gameBoard = this.gameBoard.updateBoard(id, this.playerMarker);
-  if (this.winConditions.endGame(gameBoard)){
-    this.ui.displayWin(this.playerMarker);
-    this.ui.disableAllClicks();
-  } else if (this.gameBoard.isBoardFull()) {
-      this.ui.displayTie();
+  var id = self.ui.spotClicked(e, this.playerMarker);
+  self.gameBoard.updateBoard(id, this.playerMarker);
+  var gameBoard = self.gameBoard.getBoard();
+  if (self.winConditions.endGame(gameBoard)) {
+    PlayerVsComputerGame.prototype.win(gameBoard, this.playerMarker);
+  } else if (self.gameBoard.isBoardFull()) {
+      self.ui.displayTie();
   } else {
-      this.playerMarker = this.gameBoard.switchMarker(this.playerMarker);
-      this.computerLogic.pickRandomSpace(this.ui, this.gameBoard, this.playerMarker);
-      this.playerMarker = this.gameBoard.switchMarker(this.playerMarker);
-      this.ui.displayTurn(this.playerMarker);
+    this.playerMarker = self.gameBoard.switchMarker(this.playerMarker);
+    self.computerLogic.pickRandomSpace(self.ui, self.gameBoard, this.playerMarker);
+    PlayerVsComputerGame.prototype.win(gameBoard, this.playerMarker);
+    this.playerMarker = self.gameBoard.switchMarker(this.playerMarker);
+  }
+}
+
+PlayerVsComputerGame.prototype.win = function(gameBoard, marker) {
+  if (self.winConditions.endGame(gameBoard)){
+    self.ui.displayWin(marker);
+    self.ui.disableAllClicks();
   }
 }
 
@@ -18385,28 +18396,30 @@ module.exports = PlayerVsComputerGame;
 
 },{}],50:[function(require,module,exports){
 function PlayerVsPlayerGame(ui, gameBoard, winConditions) {
-  this.ui = ui;
-  this.gameBoard = gameBoard;
-  this.winConditions = winConditions;
+  var self = this
+  self.ui = ui;
+  self.gameBoard = gameBoard;
+  self.winConditions = winConditions;
 }
 
 PlayerVsPlayerGame.prototype.initializeGame = function() {
-  this.playerMarker = "X";
-  this.ui.displayTurn(this.playerMarker);
-  this.ui.onSpotClicked(PlayerVsPlayerGame.prototype.play.bind(this));
+  self.playerMarker = "X";
+  self.ui.displayTurn(self.playerMarker);
+  self.ui.onSpotClicked(PlayerVsPlayerGame.prototype.play);
 }
 
 PlayerVsPlayerGame.prototype.play = function(e) {
-  var id = this.ui.spotClicked(e, this.playerMarker);
-  var gameBoard = this.gameBoard.updateBoard(id, this.playerMarker);
-  if (this.winConditions.endGame(gameBoard)){
-    this.ui.displayWin(this.playerMarker);
-    this.ui.disableAllClicks();
-  } else if (this.gameBoard.isBoardFull()) {
-      this.ui.displayTie();
+  var id = self.ui.spotClicked(e, self.playerMarker);
+  self.gameBoard.updateBoard(id, self.playerMarker);
+  var gameBoard = self.gameBoard.getBoard();
+  if (self.winConditions.endGame(gameBoard)){
+    self.ui.displayWin(self.playerMarker);
+    self.ui.disableAllClicks();
+  } else if (self.gameBoard.isBoardFull()) {
+      self.ui.displayTie();
   } else {
-      this.playerMarker = this.gameBoard.switchMarker(this.playerMarker);
-      this.ui.displayTurn(this.playerMarker);
+      self.playerMarker = self.gameBoard.switchMarker(self.playerMarker);
+      self.ui.displayTurn(self.playerMarker);
   }
 }
 
