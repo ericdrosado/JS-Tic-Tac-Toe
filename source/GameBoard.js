@@ -3,12 +3,13 @@ function GameBoard() {
   this.spacesAvailable = 9;
 }
 
-//inside
+GameBoard.prototype.getBoard = function() {
+  return this.gameBoard;
+}
 
 GameBoard.prototype.updateBoard = function(id, playerMarker) {
   this.gameBoard[id] = playerMarker;
   this.spacesAvailable -= 1;
-  return this.gameBoard;
 }
 
 GameBoard.prototype.isBoardFull = function() {
