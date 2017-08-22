@@ -23,7 +23,8 @@
   "homepage": "https://github.com/beccanelson/tttaas-js#readme",
   "dependencies": {
     "jquery": "^3.1.0",
-    "handlebars": "^4.0.5"
+    "handlebars": "^4.0.5",
+    "browserify": "14.4.0"
   },
   "environment": "production"
 }
