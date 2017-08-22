@@ -1,29 +1,38 @@
 function PlayerVsComputerGame(computerLogic, ui, gameBoard, winConditions) {
-  this.computerLogic = computerLogic;
-  this.ui = ui;
-  this.gameBoard = gameBoard;
-  this.winConditions = winConditions;
+  // inside
+  var self = this;
+  self.computerLogic = computerLogic;
+  self.ui = ui;
+  self.gameBoard = gameBoard;
+  self.winConditions = winConditions;
 }
 
 PlayerVsComputerGame.prototype.initializeGame = function() {
   this.playerMarker = "X";
-  this.ui.displayTurn(this.playerMarker);
-  this.ui.onSpotClicked(PlayerVsComputerGame.prototype.play.bind(this));
+  self.ui.displayTurn(self.playerMarker);
+  self.ui.onSpotClicked(PlayerVsComputerGame.prototype.play);
 }
 
 PlayerVsComputerGame.prototype.play = function(e) {
-  var id = this.ui.spotClicked(e, this.playerMarker);
-  var gameBoard = this.gameBoard.updateBoard(id, this.playerMarker);
-  if (this.winConditions.endGame(gameBoard)){
-    this.ui.displayWin(this.playerMarker);
-    this.ui.disableAllClicks();
-  } else if (this.gameBoard.isBoardFull()) {
-      this.ui.displayTie();
+  var id = self.ui.spotClicked(e, this.playerMarker);
+  self.gameBoard.updateBoard(id, this.playerMarker);
+  var gameBoard = self.gameBoard.getBoard();
+  if (self.winConditions.endGame(gameBoard)) {
+    PlayerVsComputerGame.prototype.win(gameBoard, this.playerMarker);
+  } else if (self.gameBoard.isBoardFull()) {
+      self.ui.displayTie();
   } else {
-      this.playerMarker = this.gameBoard.switchMarker(this.playerMarker);
-      this.computerLogic.pickRandomSpace(this.ui, this.gameBoard, this.playerMarker);
-      this.playerMarker = this.gameBoard.switchMarker(this.playerMarker);
-      this.ui.displayTurn(this.playerMarker);
+    this.playerMarker = self.gameBoard.switchMarker(this.playerMarker);
+    self.computerLogic.pickRandomSpace(self.ui, self.gameBoard, this.playerMarker);
+    PlayerVsComputerGame.prototype.win(gameBoard, this.playerMarker);
+    this.playerMarker = self.gameBoard.switchMarker(this.playerMarker);
+  }
+}
+
+PlayerVsComputerGame.prototype.win = function(gameBoard, marker) {
+  if (self.winConditions.endGame(gameBoard)){
+    self.ui.displayWin(marker);
+    self.ui.disableAllClicks();
   }
 }
 
