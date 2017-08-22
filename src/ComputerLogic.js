@@ -1,6 +1,6 @@
 function ComputerLogic() {
 }
-
+//change
 ComputerLogic.prototype.pickRandomSpace = function(ui, gameBoard, marker) {
   var space = gameBoard.chooseAvailableSpace();
   ui.displayMarker(space, marker);
