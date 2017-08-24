@@ -21,10 +21,23 @@ describe("PlayerVsPlayerGame", function() {
       $(".spot").attr({id: "0"}).trigger("click");
       expect($("#0").text()).toEqual("X");
     });
-    it("will display a marker after a location has been chosen", function() {
-      game.initializeGame();
+    it("will add the second player marker to the gameboard after the first player", function() {
+      var marker = "X";
+      var id;
+      var gameBoardSpots = ["0","1","2","3","4","5","6","7","8"];
+      testPlay = function(e) {
+        id = ui.spotClicked(e, marker);
+        gameBoardSpots[id] = marker;
+        marker = gameBoard.switchMarker(marker);
+      }
+      
+      ui.onSpotClicked(testPlay);
+      $(".spot").attr({id: "0"}).trigger("click");
+      expect(gameBoardSpots[0]).toEqual("X");
+
+      ui.onSpotClicked(testPlay);
       $(".spot").attr({id: "1"}).trigger("click");
-      expect($("#1").text()).toEqual("X");
+      expect(gameBoardSpots[1]).toEqual("O");
     });
   });
 
