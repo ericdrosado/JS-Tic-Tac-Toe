@@ -18356,6 +18356,7 @@ module.exports = WinConditions;
 
 },{}],49:[function(require,module,exports){
 function PlayerVsComputerGame(computerLogic, ui, gameBoard, winConditions) {
+  // inside
   var self = this;
   self.computerLogic = computerLogic;
   self.ui = ui;

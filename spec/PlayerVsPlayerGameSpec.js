@@ -21,10 +21,14 @@ describe("PlayerVsPlayerGame", function() {
       $(".spot").attr({id: "0"}).trigger("click");
       expect($("#0").text()).toEqual("X");
     });
-    it("will display a marker after a location has been chosen", function() {
+    it("will add the second player marker to the gameboard after the first player", function() {
       game.initializeGame();
-      $(".spot").attr({id: "1"}).trigger("click");
-      expect($("#1").text()).toEqual("X");
+
+      $("#0").trigger("click");
+      expect($("#0").html()).toEqual("X");
+
+      $("#1").trigger("click");
+      expect($("#1").html()).toEqual("O");
     });
   });
 
