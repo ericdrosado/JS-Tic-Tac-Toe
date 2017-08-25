@@ -1,26 +1,36 @@
 function PlayerVsPlayerGame(ui, gameBoard, winConditions) {
-  this.ui = ui;
-  this.gameBoard = gameBoard;
-  this.winConditions = winConditions;
+<<<<<<< HEAD
+=======
+  var self = this
+>>>>>>> 2096e877632704e70d9519eba30f162d2cc7c939
+  self.ui = ui;
+  self.gameBoard = gameBoard;
+  self.winConditions = winConditions;
 }
 
 PlayerVsPlayerGame.prototype.initializeGame = function() {
-  this.playerMarker = "X";
-  this.ui.displayTurn(this.playerMarker);
-  this.ui.onSpotClicked(PlayerVsPlayerGame.prototype.play.bind(this));
+  self.playerMarker = "X";
+  self.ui.displayTurn(self.playerMarker);
+  self.ui.onSpotClicked(PlayerVsPlayerGame.prototype.play);
 }
 
 PlayerVsPlayerGame.prototype.play = function(e) {
-  var id = this.ui.spotClicked(e, this.playerMarker);
-  var gameBoard = this.gameBoard.updateBoard(id, this.playerMarker);
-  if (this.winConditions.endGame(gameBoard)){
-    this.ui.displayWin(this.playerMarker);
-    this.ui.disableAllClicks();
-  } else if (this.gameBoard.isBoardFull()) {
-      this.ui.displayTie();
+  var id = self.ui.spotClicked(e, self.playerMarker);
+<<<<<<< HEAD
+  var gameBoard = self.gameBoard.getBoard();
+  self.gameBoard.updateBoard(id, self.playerMarker);
+=======
+  self.gameBoard.updateBoard(id, self.playerMarker);
+  var gameBoard = self.gameBoard.getBoard();
+>>>>>>> 2096e877632704e70d9519eba30f162d2cc7c939
+  if (self.winConditions.endGame(gameBoard)){
+    self.ui.displayWin(self.playerMarker);
+    self.ui.disableAllClicks();
+  } else if (self.gameBoard.isBoardFull()) {
+      self.ui.displayTie();
   } else {
-      this.playerMarker = this.gameBoard.switchMarker(this.playerMarker);
-      this.ui.displayTurn(this.playerMarker);
+      self.playerMarker = self.gameBoard.switchMarker(self.playerMarker);
+      self.ui.displayTurn(self.playerMarker);
   }
 }
 

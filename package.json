@@ -1,24 +1,30 @@
 {
-  "name": "becca-tom",
+  "name": "JS-Tic-Tac-Toe-",
   "version": "1.0.0",
-  "description": "Tic tac toe client in JavaScript",
+  "description": "Tic tac toe in JavaScript",
   "main": "index.js",
+  "engines": {
+    "node":"6.11.2"
+  },
   "scripts": {
-    "test": "testem"
+    "test": "testem",
+    "start": "python -m SimpleHTTPServer $PORT",
+    "heroku-postbuild": "browserify src/index.js -o bundle.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/beccanelson/tttaas-js.git"
+    "url": "git+https://github.com/ericdrosado/JS-Tic-Tac-Toe"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/beccanelson/tttaas-js/issues"
+    "url": "https://github.com/ericdrosado/JS-Tic-Tac-Toe/issues"
   },
-  "homepage": "https://github.com/beccanelson/tttaas-js#readme",
+  "homepage": "https://github.com/ericdrosado/JS-Tic-Tac-Toe/blob/master/README.md",
   "dependencies": {
     "jquery": "^3.1.0",
-    "handlebars": "^4.0.5"
+    "handlebars": "^4.0.5",
+    "browserify": "14.4.0"
   },
   "environment": "production"
 }
