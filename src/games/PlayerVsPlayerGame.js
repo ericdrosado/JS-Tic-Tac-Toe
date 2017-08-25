@@ -1,5 +1,4 @@
 function PlayerVsPlayerGame(ui, gameBoard, winConditions) {
-  var self = this
   self.ui = ui;
   self.gameBoard = gameBoard;
   self.winConditions = winConditions;
@@ -13,8 +12,8 @@ PlayerVsPlayerGame.prototype.initializeGame = function() {
 
 PlayerVsPlayerGame.prototype.play = function(e) {
   var id = self.ui.spotClicked(e, self.playerMarker);
-  self.gameBoard.updateBoard(id, self.playerMarker);
   var gameBoard = self.gameBoard.getBoard();
+  self.gameBoard.updateBoard(id, self.playerMarker);
   if (self.winConditions.endGame(gameBoard)){
     self.ui.displayWin(self.playerMarker);
     self.ui.disableAllClicks();
