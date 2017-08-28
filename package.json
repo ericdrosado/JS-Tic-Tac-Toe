@@ -1,16 +1,12 @@
 {
-  "name": "becca-tom",
+  "name": "JS-Tic-Tac-Toe",
   "version": "1.0.0",
   "description": "Tic tac toe client in JavaScript",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "test": "testem"
-=======
     "test": "testem",
     "start": "python -m SimpleHTTPServer $PORT",
     "heroku-postbuild": "browserify src/index.js -o bundle.js"
->>>>>>> 3a2dda5... Removed extra src file.
   },
   "repository": {
     "type": "git",
