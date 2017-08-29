@@ -18208,10 +18208,10 @@ ComputerLogic.prototype.pickRandomSpace = function(ui, gameBoard, marker) {
   ui.disableClickWithID(space);
 }
 
-ComputerLogic.prototype.getScore = function(user, win) {
-  if (user === "player" && win) {
+ComputerLogic.prototype.getScore = function(marker, win) {
+  if (marker === "X" && win) {
     return 10;
-  } else if (user === "computer" && win) {
+  } else if (marker === "O" && win) {
       return -10;
   } else {
       return 0;
