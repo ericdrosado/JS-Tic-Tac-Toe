@@ -18201,11 +18201,21 @@ define(function (require, exports, module) {
 function ComputerLogic() {
 }
 
-ComputerLogic.prototype.pickRandomSpace = function(ui, gameBoard, marker) {
-  var space = gameBoard.chooseAvailableSpace();
-  ui.displayMarker(space, marker);
-  gameBoard.updateBoard(space, marker);
-  ui.disableClickWithID(space);
+ComputerLogic.prototype.getMove = function(gameBoard) {
+  return gameBoard;
+}
+
+ComputerLogic.prototype.chooseAvailableSpace = function(gameBoard) {
+  for (i = 0; i <= 8; i++) {
+    if (gameBoard[i] == i ) {
+        return gameBoard[i];
+    }
+  }
+}
+
+ComputerLogic.prototype.pickSpace = function(gameBoard) {
+  var space = ComputerLogic.prototype.chooseAvailableSpace(gameBoard);
+  return space;
 }
 
 ComputerLogic.prototype.getScore = function(marker, win) {
@@ -18247,14 +18257,6 @@ GameBoard.prototype.switchMarker = function(playerMarker) {
     playerMarker = "X";
   }
   return playerMarker;
-}
-
-GameBoard.prototype.chooseAvailableSpace = function() {
-  for (i = 0; i <= 8; i++) {
-    if (this.gameBoard[i] == i ) {
-        return this.gameBoard[i];
-    }
-  }
 }
 
 module.exports = GameBoard;
@@ -18390,10 +18392,17 @@ PlayerVsComputerGame.prototype.play = function(e) {
       self.ui.displayTie();
   } else {
     this.playerMarker = self.gameBoard.switchMarker(this.playerMarker);
-    self.computerLogic.pickRandomSpace(self.ui, self.gameBoard, this.playerMarker);
-    PlayerVsComputerGame.prototype.win(gameBoard, this.playerMarker);
+    PlayerVsComputerGame.prototype.computersTurn(gameBoard, this.playerMarker);
     this.playerMarker = self.gameBoard.switchMarker(this.playerMarker);
   }
+}
+
+PlayerVsComputerGame.prototype.computersTurn = function(gameBoard, marker) {
+  var space = self.computerLogic.pickSpace(gameBoard);
+  self.ui.displayMarker(space, marker);
+  self.gameBoard.updateBoard(space, marker);
+  self.ui.disableClickWithID(space);
+  PlayerVsComputerGame.prototype.win(gameBoard, marker);
 }
 
 PlayerVsComputerGame.prototype.win = function(gameBoard, marker) {

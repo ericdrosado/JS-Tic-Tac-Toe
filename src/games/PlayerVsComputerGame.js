@@ -22,10 +22,17 @@ PlayerVsComputerGame.prototype.play = function(e) {
       self.ui.displayTie();
   } else {
     this.playerMarker = self.gameBoard.switchMarker(this.playerMarker);
-    self.computerLogic.pickRandomSpace(self.ui, self.gameBoard, this.playerMarker);
-    PlayerVsComputerGame.prototype.win(gameBoard, this.playerMarker);
+    PlayerVsComputerGame.prototype.computersTurn(gameBoard, this.playerMarker);
     this.playerMarker = self.gameBoard.switchMarker(this.playerMarker);
   }
+}
+
+PlayerVsComputerGame.prototype.computersTurn = function(gameBoard, marker) {
+  var space = self.computerLogic.pickSpace(gameBoard);
+  self.ui.displayMarker(space, marker);
+  self.gameBoard.updateBoard(space, marker);
+  self.ui.disableClickWithID(space);
+  PlayerVsComputerGame.prototype.win(gameBoard, marker);
 }
 
 PlayerVsComputerGame.prototype.win = function(gameBoard, marker) {

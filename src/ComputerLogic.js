@@ -1,11 +1,21 @@
 function ComputerLogic() {
 }
 
-ComputerLogic.prototype.pickRandomSpace = function(ui, gameBoard, marker) {
-  var space = gameBoard.chooseAvailableSpace();
-  ui.displayMarker(space, marker);
-  gameBoard.updateBoard(space, marker);
-  ui.disableClickWithID(space);
+ComputerLogic.prototype.getMove = function(gameBoard) {
+  return gameBoard;
+}
+
+ComputerLogic.prototype.chooseAvailableSpace = function(gameBoard) {
+  for (i = 0; i <= 8; i++) {
+    if (gameBoard[i] == i ) {
+        return gameBoard[i];
+    }
+  }
+}
+
+ComputerLogic.prototype.pickSpace = function(gameBoard) {
+  var space = ComputerLogic.prototype.chooseAvailableSpace(gameBoard);
+  return space;
 }
 
 ComputerLogic.prototype.getScore = function(marker, win) {
