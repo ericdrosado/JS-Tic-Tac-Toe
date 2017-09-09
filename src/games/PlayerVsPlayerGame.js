@@ -15,10 +15,9 @@ PlayerVsPlayerGame.prototype.play = function(e) {
   var id = self.ui.spotClicked(e, self.playerMarker);
   var gameBoard = self.gameBoard.getBoard();
   self.gameBoard.updateBoard(id, self.playerMarker);
-  if (self.winConditions.endGame(gameBoard)){
-    self.ui.displayWin(self.playerMarker);
-    self.ui.disableAllClicks();
-  } else if (self.gameBoard.isBoardFull()) {
+  if (self.winConditions.isWinner(gameBoard)) {
+    self.ui.displayWin(this.playerMarker);
+  } else if (self.winConditions.isTie(gameBoard)) {
       self.ui.displayTie();
   } else {
       self.playerMarker = self.gameBoard.switchMarker(self.playerMarker);

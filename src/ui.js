@@ -9,6 +9,7 @@ UI.prototype.displayTurn = function(marker) {
 
 UI.prototype.displayWin = function(marker) {
   $("#turn-label").html(marker + " Wins!");
+  UI.prototype.disableAllClicks();
 }
 
 UI.prototype.displayTie = function() {

@@ -26,25 +26,6 @@ describe("WinConditions", function() {
     });
   });
 
-  describe("#endGame", function() {
-    it("will return true if player has three in a row", function() {
-      var board = ["X","X","X","O","O","5","6","7","8"];
-      expect(winConditions.endGame(board)).toBe(true);
-    });
-    it("will return true if player has three in a row", function() {
-      var board = ["X","X","O","X","X","O","6","7","O"];
-      expect(winConditions.endGame(board)).toBe(true);
-    });
-    it("will return false if player does not have three in a row", function() {
-      var board = ["X","O","X","X","4","O","6","7","8"];
-      expect(winConditions.endGame(board)).toBe(false);
-    });
-    it("will return false if player does not have three in a row", function() {
-      var board = ["X","O","2","3","4","O","X","7","X"];
-      expect(winConditions.endGame(board)).toBe(false);
-    });
-  });
-
   describe("#winHorizontalTop", function() {
     it("will return true if player has three in a row in top horizontal", function() {
       var board = ["X","X","X","O","4","O","6","7","8"];

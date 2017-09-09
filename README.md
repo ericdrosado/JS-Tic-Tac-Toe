@@ -19,7 +19,7 @@ beefy --browserify bundle.js
 + In the root directory, re-load the project:
 ```
 npm install -g browserify
-browserify src/main.js -o bundle.js
+browserify src/index.js -o bundle.js
 ```
 + Restart server
 
@@ -31,4 +31,4 @@ browserify src/main.js -o bundle.js
 # NOTES
 
 to run the tests right now with updated js you need to run this before `testem`:
-`browserify src/main.js -o bundle.js
+```browserify spec/test.js -o test_bundle.js```

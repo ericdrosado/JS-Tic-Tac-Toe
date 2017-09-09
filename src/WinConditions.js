@@ -5,6 +5,15 @@ WinConditions.prototype.endGame = function(gameBoard) {
   return WinConditions.prototype.isWinner(gameBoard);
 }
 
+WinConditions.prototype.isTie = function(gameBoard) {
+  for (i = 0; i < 9; i++) {
+    if (gameBoard[i] == i) {
+      return false;
+    }
+  }
+  return true;
+}
+
 WinConditions.prototype.isWinner = function(gameBoard) {
   return WinConditions.prototype.winHorizontalTop(gameBoard) || WinConditions.prototype.winHorizontalMiddle(gameBoard) ||
         WinConditions.prototype.winHorizontalBottom(gameBoard) || WinConditions.prototype.winVerticalLeft(gameBoard) ||
