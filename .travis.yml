@@ -2,5 +2,8 @@ language: node_js
 node_js: stable
 before_install:
   - npm install testem
+  - npm install browserify
+before_script:
+  - browserify spec/test.js -o test_bundle.js
 script:
   - testem ci --launch PhantomJS

@@ -16,7 +16,7 @@ UI.prototype.displayTie = function() {
 }
 
 UI.prototype.onSpotClicked = function(callback) {
-  $(".spot").on("click", (e) => {
+  $(".spot").on("click", function(e) {
     callback(e);
   });
 }
@@ -29,7 +29,7 @@ UI.prototype.spotClicked = function(e, playerMarker) {
 }
 
 UI.prototype.onButtonClicked = function(callback, ui) {
-  $(".button").on("click", (e) => {
+  $(".button").on("click", function(e) {
     callback(e, ui);
   });
 }
