@@ -23,7 +23,7 @@ TicTacToe.prototype.determineGameType = function(e, ui) {
   if (id === "PvP") {
     game = new PlayerVsPlayerGame(ui, this.gameBoard, this.winConditions);
   } else {
-      this.computerLogic = new ComputerLogic();
+      this.computerLogic = new ComputerLogic(this.winConditions);
       game = new PlayerVsComputerGame(this.computerLogic, ui, this.gameBoard, this.winConditions);
   }
   var compiler = new HandlebarsCompiler();

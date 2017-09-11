@@ -8,7 +8,7 @@ function PlayerVsComputerGame(computerLogic, ui, gameBoard, winConditions) {
 
 PlayerVsComputerGame.prototype.initializeGame = function() {
   this.playerMarker = "X";
-  self.ui.displayTurn(self.playerMarker);
+  self.ui.displayTurn(this.playerMarker);
   self.ui.onSpotClicked(PlayerVsComputerGame.prototype.play);
 }
 
