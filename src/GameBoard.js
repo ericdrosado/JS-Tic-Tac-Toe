@@ -11,11 +11,7 @@ GameBoard.prototype.updateBoard = function(id, playerMarker) {
 }
 
 GameBoard.prototype.switchMarker = function(playerMarker) {
-  if (playerMarker === "X") {
-    playerMarker = "O";
-  } else {
-    playerMarker = "X";
-  }
+  playerMarker = playerMarker === "O" ? "X":"O"
   return playerMarker;
 }
 
