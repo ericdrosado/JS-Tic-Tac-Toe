@@ -68,7 +68,7 @@ describe("ComputerLogic", function() {
         "O" === endOfGameBoard[0] && endOfGameBoard[0] === endOfGameBoard[3] && endOfGameBoard[3] === endOfGameBoard[6] ||
         "O" === endOfGameBoard[1] && endOfGameBoard[1] === endOfGameBoard[4] && endOfGameBoard[4] === endOfGameBoard[7] ||
         "O" === endOfGameBoard[2] && endOfGameBoard[2] === endOfGameBoard[5] && endOfGameBoard[5] === endOfGameBoard[8] ||
-        "O" === endOfGameBoard[O] && endOfGameBoard[0] === endOfGameBoard[4] && endOfGameBoard[4] === endOfGameBoard[8] ||
+        "O" === endOfGameBoard[0] && endOfGameBoard[0] === endOfGameBoard[4] && endOfGameBoard[4] === endOfGameBoard[8] ||
         "O" === endOfGameBoard[2] && endOfGameBoard[2] === endOfGameBoard[4] && endOfGameBoard[4] === endOfGameBoard[6] ||
         winConditions.isTie(endOfGameBoard);
       }
