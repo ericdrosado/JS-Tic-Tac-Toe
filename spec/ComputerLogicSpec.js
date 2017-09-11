@@ -53,10 +53,16 @@ describe("ComputerLogic", function() {
 
       play = function(gameBoard) {
         while (! winConditions.isGameOver(gameBoard) ) {
-          var gameBoardSpace = Math.floor(Math.random() * 10);
-          gameBoard[gameBoardSpace] = "X";
-          var computerMove = computerLogic.pickSpace(gameBoard);
-          gameBoard[computerMove] = "O";
+          var availableSpots = computerLogic.getAvailableSpots(gameBoard);
+          var mockPlayerMoveIndex = Math.floor(Math.random() * (availableSpots.length + 1));
+          var mockPlayerMove = availableSpots[mockPlayerMoveIndex];
+          gameBoard[mockPlayerMove] = "X";
+          if (winConditions.isGameOver(gameBoard)) {
+            return gameBoard;
+          } else {
+              var computerMove = computerLogic.pickSpace(gameBoard);
+              gameBoard[computerMove] = "O";
+          }
         }
         return gameBoard;
       }
