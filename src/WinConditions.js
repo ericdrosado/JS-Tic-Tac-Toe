@@ -1,8 +1,12 @@
 function WinConditions() {
 }
 
-WinConditions.prototype.endGame = function(gameBoard) {
-  return WinConditions.prototype.isWinner(gameBoard);
+WinConditions.prototype.isGameOver = function(gameBoard) {
+  if (WinConditions.prototype.isWinner(gameBoard) || WinConditions.prototype.isTie(gameBoard)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 WinConditions.prototype.isTie = function(gameBoard) {
