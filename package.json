@@ -4,7 +4,7 @@
   "description": "Tic tac toe in JavaScript",
   "main": "index.js",
   "engines": {
-    "node":"6.11.2"
+    "node": "6.11.2"
   },
   "scripts": {
     "test": "testem",
