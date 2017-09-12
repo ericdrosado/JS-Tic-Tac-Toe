@@ -60,14 +60,14 @@ describe("ComputerLogic", function() {
           gameBoardCopy = gameBoard.slice();
           gameBoardCopy[mockPlayerMove] = "X";
           if (winConditions.isGameOver(gameBoardCopy)) {
-            if (!computerWinOrTie(gameBoardCopy)) {
+            if (winConditions.isWinner(gameBoardCopy)) {
               computerLosses += 1;
             }
           } else {
             var computerMove = computerLogic.pickSpace(gameBoardCopy);
             gameBoardCopy[computerMove] = "O";
             if (winConditions.isGameOver(gameBoardCopy)) {
-              if (!computerWinOrTie(gameBoardCopy)) {
+              if (!winConditions.isWinner(gameBoardCopy)) {
                 computerLosses += 1;
               }
             } else {
@@ -75,18 +75,6 @@ describe("ComputerLogic", function() {
             }
           }
         }
-      }
-
-      computerWinOrTie = function(endOfGameBoard) {
-        return "O" === endOfGameBoard[0] && endOfGameBoard[0] === endOfGameBoard[1] && endOfGameBoard[1] === endOfGameBoard[2] ||
-        "O" === endOfGameBoard[3] && endOfGameBoard[3] === endOfGameBoard[4] && endOfGameBoard[4] === endOfGameBoard[5] ||
-        "O" === endOfGameBoard[6] && endOfGameBoard[6] === endOfGameBoard[7] && endOfGameBoard[7] === endOfGameBoard[8] ||
-        "O" === endOfGameBoard[0] && endOfGameBoard[0] === endOfGameBoard[3] && endOfGameBoard[3] === endOfGameBoard[6] ||
-        "O" === endOfGameBoard[1] && endOfGameBoard[1] === endOfGameBoard[4] && endOfGameBoard[4] === endOfGameBoard[7] ||
-        "O" === endOfGameBoard[2] && endOfGameBoard[2] === endOfGameBoard[5] && endOfGameBoard[5] === endOfGameBoard[8] ||
-        "O" === endOfGameBoard[0] && endOfGameBoard[0] === endOfGameBoard[4] && endOfGameBoard[4] === endOfGameBoard[8] ||
-        "O" === endOfGameBoard[2] && endOfGameBoard[2] === endOfGameBoard[4] && endOfGameBoard[4] === endOfGameBoard[6] ||
-        winConditions.isTie(endOfGameBoard);
       }
 
       var gameBoard = ["0","1","2","3","4","5","6","7","8"];
