@@ -49,22 +49,32 @@ describe("ComputerLogic", function() {
       var gameBoard = ["O","X","X","3","4","5","X","7","O"];
       expect(computerLogic.pickSpace(gameBoard)).toEqual(4);
     });
-    it ("will play a game and O will win or tie", function() {
+    it ("will play all possible games and O will win or tie and never lose", function() {
+      var computerLosses = 0;
 
       play = function(gameBoard) {
-        while (! winConditions.isGameOver(gameBoard) ) {
-          var availableSpots = computerLogic.getAvailableSpots(gameBoard);
-          var mockPlayerMoveIndex = Math.floor(Math.random() * (availableSpots.length + 1));
-          var mockPlayerMove = availableSpots[mockPlayerMoveIndex];
-          gameBoard[mockPlayerMove] = "X";
-          if (winConditions.isGameOver(gameBoard)) {
-            return gameBoard;
+        var availableSpots = computerLogic.getAvailableSpots(gameBoard);
+
+        for (var i = 0; i < availableSpots.length; i++) {
+          var mockPlayerMove = availableSpots[i];
+          gameBoardCopy = gameBoard.slice();
+          gameBoardCopy[mockPlayerMove] = "X";
+          if (winConditions.isGameOver(gameBoardCopy)) {
+            if (!computerWinOrTie(gameBoardCopy)) {
+              computerLosses += 1;
+            }
           } else {
-              var computerMove = computerLogic.pickSpace(gameBoard);
-              gameBoard[computerMove] = "O";
+            var computerMove = computerLogic.pickSpace(gameBoardCopy);
+            gameBoardCopy[computerMove] = "O";
+            if (winConditions.isGameOver(gameBoardCopy)) {
+              if (!computerWinOrTie(gameBoardCopy)) {
+                computerLosses += 1;
+              }
+            } else {
+              play(gameBoardCopy);
+            }
           }
         }
-        return gameBoard;
       }
 
       computerWinOrTie = function(endOfGameBoard) {
@@ -80,9 +90,9 @@ describe("ComputerLogic", function() {
       }
 
       var gameBoard = ["0","1","2","3","4","5","6","7","8"];
-      var endOfGameBoard = play(gameBoard);
+      play(gameBoard);
 
-      expect(computerWinOrTie(endOfGameBoard)).toEqual(true);
+      expect(computerLosses).toEqual(0);
     });
   });
 
