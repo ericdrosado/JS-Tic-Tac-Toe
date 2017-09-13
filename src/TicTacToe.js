@@ -4,7 +4,7 @@ var GameBoard = require('./GameBoard');
 var HandlebarsCompiler = require('./HandlebarsCompiler');
 var PlayerVsComputerGame = require('./games/PlayerVsComputerGame');
 var PlayerVsPlayerGame = require('./games/PlayerVsPlayerGame');
-var UI = require('./ui');
+var UI = require('./UI');
 var WinConditions = require('./WinConditions');
 
 var TicTacToe = function() {
