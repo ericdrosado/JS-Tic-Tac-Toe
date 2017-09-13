@@ -4,9 +4,9 @@ body {
 }
 
 td {
-border: 1px solid black;
-height: 50px;
-width: 50px;
+  border: 1px solid black;
+  height: 50px;
+  width: 50px;
 }
 
 .spot {
