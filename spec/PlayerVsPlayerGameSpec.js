@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var GameBoard = require('../src/GameBoard');
 var PlayerVsPlayerGame = require('../src/games/PlayerVsPlayerGame');
-var UI = require('../src/ui');
+var UI = require('../src/UI');
 var WinConditions = require('../src/WinConditions');
 
 describe("PlayerVsPlayerGame", function() {
