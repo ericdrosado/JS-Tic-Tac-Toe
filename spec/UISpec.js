@@ -1,5 +1,5 @@
 var $ = require('jquery');
-var UI = require('../src/ui');
+var UI = require('../src/UI');
 
 describe("UI", function() {
   beforeEach(function() {
